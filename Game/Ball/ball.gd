@@ -35,6 +35,8 @@ func _on_player_launch_ball(value):
 	game_started = value
 
 func launch_ball():
-	direction = Vector2(1,-1)
+	linear_velocity = direction * initial_speed
+	position.x = paddle.position.x
+	position.y = paddle.position.y - 20 
 	grounded = false
 	game_started = true

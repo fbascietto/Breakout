@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 signal launch_ball
 var game_started = false
-var speed = 300
+var speed = 400
 @export var laser_particle_scene: PackedScene
 var laser_shooting = false
 var laser_shooting_timer = null
@@ -32,7 +32,7 @@ func _physics_process(delta):
 	position.y = 750
 	
 	# Shoot lasers if active
-	if laser_shooting and Time.get_ticks_msec() % 500 < 16:  # Adjust firing rate as needed
+	if laser_shooting and Time.get_ticks_msec() % 500 < 32:  # Adjust firing rate as needed
 		shoot_lasers()
 
 func _on_launch_ball():

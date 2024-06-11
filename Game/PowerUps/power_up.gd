@@ -8,10 +8,10 @@ extends Area2D
 @export var laser_shot_sprite: Texture2D
 
 #laser parameters
-@export var laser_duration: float = 5.0
+@export var laser_duration: float = 10.0
 
 #speed parameters
-@export var speed_increase: float = 100.0
+@export var speed_increase: float = 200.0
 @export var duration: float = 10.0
 	
 var power_up_type: int
