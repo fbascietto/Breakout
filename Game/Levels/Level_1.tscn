@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://cuh0412b8g6v7"]
+
+[ext_resource type="Script" path="res://Game/Levels/Level_1.gd" id="1_c62f5"]
+[ext_resource type="PackedScene" uid="uid://sw53c6ll5q3r" path="res://Game/Player/Player.tscn" id="1_lsqcs"]
+[ext_resource type="PackedScene" uid="uid://duvttb1y5lqq0" path="res://Game/Blocks/block.tscn" id="2_3nh60"]
+[ext_resource type="PackedScene" uid="uid://bdnt2bmbmqr7b" path="res://Game/Walls/wall.tscn" id="2_jue0o"]
+[ext_resource type="PackedScene" uid="uid://b17fnhu5jw0yv" path="res://Game/Ball/ball.tscn" id="5_cdpns"]
+
+[node name="Level1" type="Node2D"]
+script = ExtResource("1_c62f5")
+block_scene = ExtResource("2_3nh60")
+
+[node name="Player" parent="." instance=ExtResource("1_lsqcs")]
+position = Vector2(296, 750)
+floor_constant_speed = true
+
+[node name="Walls" type="Node" parent="."]
+
+[node name="LeftWall" parent="Walls" instance=ExtResource("2_jue0o")]
+visible = false
+position = Vector2(-11, 574)
+rotation = -1.56969
+
+[node name="Right Wall" parent="Walls" instance=ExtResource("2_jue0o")]
+visible = false
+position = Vector2(607, 570)
+rotation = -1.56969
+
+[node name="Top wall" parent="Walls" instance=ExtResource("2_jue0o")]
+visible = false
+
+[node name="Ball" parent="." instance=ExtResource("5_cdpns")]
+position = Vector2(297, 730)
+gravity_scale = 0.0
+
+[connection signal="launch_ball" from="Player" to="Ball" method="_on_player_launch_ball"]

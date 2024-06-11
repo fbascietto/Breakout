@@ -1,0 +1,22 @@
+[gd_scene load_steps=6 format=3 uid="uid://c1frguplavng1"]
+
+[ext_resource type="Script" path="res://Game/PowerUps/power_up.gd" id="1_e3r46"]
+[ext_resource type="Texture2D" uid="uid://cjuyp72vsn7hx" path="res://Art/S.png" id="2_0jiqm"]
+[ext_resource type="Texture2D" uid="uid://vbssgomiae8n" path="res://Art/B.png" id="3_7viov"]
+[ext_resource type="Texture2D" uid="uid://cnpfp1tmswcog" path="res://Art/L.png" id="4_bqwqp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_08vw7"]
+
+[node name="PowerUp" type="Area2D"]
+script = ExtResource("1_e3r46")
+speed_up_sprite = ExtResource("2_0jiqm")
+extra_ball_sprite = ExtResource("3_7viov")
+laser_shot_sprite = ExtResource("4_bqwqp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, -1)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_0jiqm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_08vw7")

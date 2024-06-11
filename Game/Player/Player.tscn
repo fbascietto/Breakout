@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://sw53c6ll5q3r"]
+
+[ext_resource type="Script" path="res://Game/Player/Player.gd" id="1_766ha"]
+[ext_resource type="Texture2D" uid="uid://d3j17hko4m1bc" path="res://icon.svg" id="2_3c2c7"]
+[ext_resource type="PackedScene" uid="uid://3qyxnv0eiyqt" path="res://Game/PowerUps/Laser/Laser.tscn" id="2_vh6hr"]
+[ext_resource type="Texture2D" uid="uid://dlsgmx6kuje2i" path="res://Art/laser_shuttle.png" id="3_bb7w5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4wpwp"]
+size = Vector2(77, 15)
+
+[node name="Player" type="CharacterBody2D"]
+floor_stop_on_slope = false
+floor_block_on_wall = false
+script = ExtResource("1_766ha")
+laser_particle_scene = ExtResource("2_vh6hr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -1)
+scale = Vector2(0.601562, 0.125)
+texture = ExtResource("2_3c2c7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_4wpwp")
+
+[node name="LaserLeft" type="Sprite2D" parent="."]
+position = Vector2(-36, -2)
+scale = Vector2(0.132883, 0.132883)
+texture = ExtResource("3_bb7w5")
+
+[node name="LaserRight" type="Sprite2D" parent="."]
+position = Vector2(37, -2)
+scale = Vector2(0.129567, 0.129567)
+texture = ExtResource("3_bb7w5")
