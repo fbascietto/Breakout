@@ -1,5 +1,8 @@
 extends StaticBody2D
 
+
+signal dead_block
+
 enum PowerUpType {
 	SPEED_UP,
 	EXTRA_BALL,
@@ -30,6 +33,7 @@ func _on_body_entered(body):
 			
 		health -= 1
 		if health <= 0:
+			dead_block.emit()
 			queue_free()  # Remove the block from the scene
 
 func randomize_power_up(power_up_instance):

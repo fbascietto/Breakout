@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://cuh0412b8g6v7"]
+[gd_scene load_steps=7 format=3 uid="uid://cuh0412b8g6v7"]
 
 [ext_resource type="Script" path="res://Game/Levels/Level_1.gd" id="1_c62f5"]
 [ext_resource type="PackedScene" uid="uid://sw53c6ll5q3r" path="res://Game/Player/Player.tscn" id="1_lsqcs"]
 [ext_resource type="PackedScene" uid="uid://duvttb1y5lqq0" path="res://Game/Blocks/block.tscn" id="2_3nh60"]
 [ext_resource type="PackedScene" uid="uid://bdnt2bmbmqr7b" path="res://Game/Walls/wall.tscn" id="2_jue0o"]
 [ext_resource type="PackedScene" uid="uid://b17fnhu5jw0yv" path="res://Game/Ball/ball.tscn" id="5_cdpns"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s4h1v"]
+size = Vector2(680, 33.5)
 
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_c62f5")
@@ -30,7 +33,112 @@ rotation = -1.56969
 visible = false
 
 [node name="Ball" parent="." instance=ExtResource("5_cdpns")]
-position = Vector2(297, 730)
-gravity_scale = 0.0
+position = Vector2(296, 730)
 
-[connection signal="launch_ball" from="Player" to="Ball" method="_on_player_launch_ball"]
+[node name="BallChecker" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BallChecker"]
+position = Vector2(295, 817)
+shape = SubResource("RectangleShape2D_s4h1v")
+
+[node name="LosingLayout" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 181.0
+offset_top = 314.0
+offset_right = 411.0
+offset_bottom = 446.0
+
+[node name="Lose" type="Label" parent="LosingLayout"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -77.0
+offset_top = -21.0
+offset_right = 77.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "YOU LOSE!"
+
+[node name="TryAgain" type="Button" parent="LosingLayout"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -46.5
+offset_top = -31.0
+offset_right = 46.5
+grow_horizontal = 2
+grow_vertical = 0
+text = "Try again
+"
+
+[node name="WinningLayout" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 129.0
+offset_top = 292.0
+offset_right = 463.0
+offset_bottom = 447.0
+
+[node name="Win" type="Label" parent="WinningLayout"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -106.5
+offset_top = -31.5
+offset_right = 106.5
+offset_bottom = 31.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 45
+text = "YOU WIN!"
+
+[node name="NextLevel" type="Button" parent="WinningLayout"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -45.0
+offset_top = -31.0
+offset_right = 45.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Next Level"
+
+[node name="Score" type="Label" parent="."]
+offset_left = 12.0
+offset_top = 9.0
+offset_right = 83.0
+offset_bottom = 40.0
+text = "Score: 0"
+
+[node name="Lives" type="Label" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 529.0
+offset_top = 6.0
+offset_right = 586.0
+offset_bottom = 29.0
+grow_horizontal = 0
+text = "Lives: 3"
+
+[connection signal="life_lost" from="." to="Player" method="_on_level_1_life_lost"]
+[connection signal="body_entered" from="BallChecker" to="." method="_on_area_2d_body_entered"]
+[connection signal="pressed" from="LosingLayout/TryAgain" to="." method="_on_try_again_pressed"]
+[connection signal="pressed" from="WinningLayout/NextLevel" to="." method="_on_next_level_pressed"]
