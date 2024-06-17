@@ -11,8 +11,8 @@ extends Area2D
 @export var laser_duration: float = 10.0
 
 #speed parameters
-@export var speed_increase: float = 500.0
-@export var duration: float = 10.0
+@export var speed_increase: int = 500
+@export var duration: int = 10
 	
 var power_up_type: int
 
@@ -30,12 +30,12 @@ func _on_body_entered(body):
 func apply_power_up(player):
 	match power_up_type:
 		0:
-			player.increase_speed(speed_increase, duration)
+			player.speed_powerup_go(500)
 		1:
 			player.spawn_extra_ball()
 		2:
 			player.activate_lasers(laser_duration)
-	pass  # To be implemented by subclasses
+
 
 func set_power_up_type(type):
 	power_up_type = type

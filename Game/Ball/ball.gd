@@ -13,7 +13,7 @@ var game_started = false
 var paddle = null
 
 func _ready():
-	self.connect("body_entered", Callable(self, "_on_body_entered"))
+	connect("body_entered", Callable(self, "_on_body_entered"))
 	paddle = get_parent().get_node("Player")
 	paddle.connect('launch_ball', Callable(self, "_on_player_launch_ball"))
 	
@@ -22,7 +22,7 @@ func _ready():
 	direction = Vector2(cos(angle), sin(angle)).normalized()
 	
 func _physics_process(delta):
-	if grounded:
+	if paddle != null && grounded:
 		position.x = paddle.position.x
 	
 	if game_started:

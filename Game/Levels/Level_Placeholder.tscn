@@ -1,38 +1,38 @@
 [gd_scene load_steps=7 format=3 uid="uid://cuh0412b8g6v7"]
 
-[ext_resource type="Script" path="res://Game/Levels/Level_1.gd" id="1_c62f5"]
-[ext_resource type="PackedScene" uid="uid://sw53c6ll5q3r" path="res://Game/Player/Player.tscn" id="1_lsqcs"]
-[ext_resource type="PackedScene" uid="uid://duvttb1y5lqq0" path="res://Game/Blocks/block.tscn" id="2_3nh60"]
-[ext_resource type="PackedScene" uid="uid://bdnt2bmbmqr7b" path="res://Game/Walls/wall.tscn" id="2_jue0o"]
-[ext_resource type="PackedScene" uid="uid://b17fnhu5jw0yv" path="res://Game/Ball/ball.tscn" id="5_cdpns"]
+[ext_resource type="Script" path="res://Game/Levels/Level_Placeholder.gd" id="1_1k2qk"]
+[ext_resource type="PackedScene" uid="uid://duvttb1y5lqq0" path="res://Game/Blocks/block.tscn" id="2_rsdxe"]
+[ext_resource type="PackedScene" uid="uid://sw53c6ll5q3r" path="res://Game/Player/Player.tscn" id="3_fe0ug"]
+[ext_resource type="PackedScene" uid="uid://bdnt2bmbmqr7b" path="res://Game/Walls/wall.tscn" id="4_j310y"]
+[ext_resource type="PackedScene" uid="uid://b17fnhu5jw0yv" path="res://Game/Ball/ball.tscn" id="5_1r4ri"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s4h1v"]
 size = Vector2(680, 33.5)
 
 [node name="Level1" type="Node2D"]
-script = ExtResource("1_c62f5")
-block_scene = ExtResource("2_3nh60")
+script = ExtResource("1_1k2qk")
+block_scene = ExtResource("2_rsdxe")
 
-[node name="Player" parent="." instance=ExtResource("1_lsqcs")]
+[node name="Player" parent="." instance=ExtResource("3_fe0ug")]
 position = Vector2(296, 750)
 floor_constant_speed = true
 
 [node name="Walls" type="Node" parent="."]
 
-[node name="LeftWall" parent="Walls" instance=ExtResource("2_jue0o")]
+[node name="LeftWall" parent="Walls" instance=ExtResource("4_j310y")]
 visible = false
 position = Vector2(-11, 574)
 rotation = -1.56969
 
-[node name="Right Wall" parent="Walls" instance=ExtResource("2_jue0o")]
+[node name="Right Wall" parent="Walls" instance=ExtResource("4_j310y")]
 visible = false
 position = Vector2(607, 570)
 rotation = -1.56969
 
-[node name="Top wall" parent="Walls" instance=ExtResource("2_jue0o")]
+[node name="Top wall" parent="Walls" instance=ExtResource("4_j310y")]
 visible = false
 
-[node name="Ball" parent="." instance=ExtResource("5_cdpns")]
+[node name="Ball" parent="." instance=ExtResource("5_1r4ri")]
 position = Vector2(296, 730)
 
 [node name="BallChecker" type="Area2D" parent="."]
@@ -121,10 +121,10 @@ grow_vertical = 0
 text = "Next Level"
 
 [node name="Score" type="Label" parent="."]
-offset_left = 12.0
-offset_top = 9.0
-offset_right = 83.0
-offset_bottom = 40.0
+offset_left = 401.0
+offset_top = 8.0
+offset_right = 472.0
+offset_bottom = 39.0
 text = "Score: 0"
 
 [node name="Lives" type="Label" parent="."]

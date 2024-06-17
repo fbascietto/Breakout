@@ -1,12 +1,15 @@
 extends CharacterBody2D
 
-@onready var laser_timer = $Timer 
+@onready var laser_timer = $LaserTimer
+@onready var speed_timer = $SpeedTimer 
 
 signal launch_ball
 @export var laser_particle_scene: PackedScene
 
-var speed = 400
+var initial_speed: int = 400
+var speed:int  = 400
 var game_started = false
+var speed_powerup_on = false
 var laser_shooting = false
 var iName = 'Player'
 
@@ -27,10 +30,7 @@ func _process(delta):
 		_on_launch_ball()
 
 func _physics_process(delta):
-	# Update the variables to watch
-	debugger_instance.set_variable("speed", speed)
-	debugger_instance.set_variable("laser timer", laser_timer.wait_time)
-	
+	print(speed)
 	var move_left = Input.is_action_pressed("move_left")
 	var move_right = Input.is_action_pressed("move_right")
 	 # Calculate the movement based on input
@@ -44,6 +44,10 @@ func _physics_process(delta):
 	
 	position.y = 750
 	
+		# Update the variables to watch
+	debugger_instance.set_variable("speed tiper", speed_timer.time_left)
+	debugger_instance.set_variable("laser timer", laser_timer.time_left)
+	
 	# Shoot lasers if active
 	if laser_shooting and Time.get_ticks_msec() % 500 < 16:  # Adjust firing rate as needed
 		shoot_lasers()
@@ -52,17 +56,24 @@ func _on_launch_ball():
 	game_started = true
 	launch_ball.emit(game_started)
 
-func increase_speed(amount, duration) -> void:
-	print(amount)
-	self.speed += amount
-	print(speed)
-	await get_tree().create_timer(duration)
-	self.speed -= amount
+
+func speed_powerup_go(value):
+	if speed_powerup_on:
+		speed_timer.time_left += 5
+		return
+	
+	speed_powerup_on = true
+	speed += value
+	speed_timer.wait_time = 10
+	speed_timer.start()
+	await speed_timer.timeout
+	speed -= value
+	speed_powerup_on = false
 
 func spawn_extra_ball():
 	var ball_scene = preload("../Ball/ball.tscn")
 	var ball_instance = ball_scene.instantiate()
-	ball_instance.position = position + Vector2(0, -50)  # Adjust as needed
+	ball_instance.position = position + Vector2(0, -20)  # Adjust as needed
 	get_parent().add_child(ball_instance)
 	ball_instance.launch_ball()
 

@@ -1,6 +1,6 @@
 extends Control
 
-const MAIN_LEVEL = "res://Game/Levels/Level_1.tscn"
+const MAIN_LEVEL = "res://Game/Levels/Level_Placeholder.tscn"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

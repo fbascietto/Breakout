@@ -14,6 +14,7 @@ scale = Vector2(0.635294, 0.635294)
 texture = ExtResource("1_aoep7")
 
 [node name="Label" type="Label" parent="."]
+layout_mode = 0
 offset_left = 174.0
 offset_top = 57.0
 offset_right = 419.0
@@ -23,6 +24,7 @@ theme_override_font_sizes/font_size = 45
 text = "CUADRAZO"
 
 [node name="Button" type="Button" parent="."]
+layout_mode = 0
 offset_left = 247.0
 offset_top = 541.0
 offset_right = 350.0

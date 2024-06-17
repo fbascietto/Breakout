@@ -20,7 +20,6 @@ var q_balls
 func _ready():
 	setup_blocks()
 	
-
 func _process(delta):
 	q_blocks = get_children().filter(func(child): return child is StaticBody2D).size()
 	q_balls = get_children().filter(func(child): return child is Ball).size()
