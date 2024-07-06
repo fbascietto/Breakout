@@ -15,6 +15,11 @@ run/main_scene="res://Game/landing.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Global="*res://Game/Global.gd"
+AudioManager="*res://Game/AudioManager/AudioManager.tscn"
+
 [display]
 
 window/size/viewport_width=600

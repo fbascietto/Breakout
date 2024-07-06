@@ -49,9 +49,17 @@ func launch_ball():
 	game_started = true
 
 func _on_body_entered(body):
-	print(body.name)
+	AudioManager.play_sound(AudioManager.HIT)
 	if body.name == "Player":
 		var paddle = body as CharacterBody2D
+		var hit_pos = position.x - paddle.position.x
+		var angle = lerp(-PI / 4, PI / 4, hit_pos / (paddle.size.x / 2))
+		linear_velocity = Vector2(cos(angle), -sin(angle)) * linear_velocity.length()
+
+func _on_area_2d_area_entered(area):
+	AudioManager.play_sound(AudioManager.HIT)
+	if area.name == "Player":
+		var paddle = area as CharacterBody2D
 		var hit_pos = position.x - paddle.position.x
 		var angle = lerp(-PI / 4, PI / 4, hit_pos / (paddle.size.x / 2))
 		linear_velocity = Vector2(cos(angle), -sin(angle)) * linear_velocity.length()

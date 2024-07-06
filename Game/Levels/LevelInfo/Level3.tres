@@ -1,0 +1,7 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://k2mvh3y2ub6u"]
+
+[ext_resource type="Script" path="res://Game/Levels/LevelInfo/LevelData.gd" id="1_a3cr5"]
+
+[resource]
+script = ExtResource("1_a3cr5")
+num_rows = 11

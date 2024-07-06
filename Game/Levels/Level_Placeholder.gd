@@ -1,7 +1,5 @@
 extends Node2D
 
-const MAIN_LEVEL = "res://Game/landing.tscn"
-
 signal life_lost
  
 @export var block_scene : PackedScene
@@ -10,14 +8,20 @@ signal life_lost
 @onready var lose_message : Control = $LosingLayout
 @onready var win_message : Control = $WinningLayout
 
-var starting_corner: Vector2 = Vector2(48,86)
+var backgroundArray = [ 
+	preload("res://Art/Green.png"),
+	preload("res://Art/Yellow.png"),
+	preload("res://Art/Blue.png"),
+	preload("res://Art/Gray.png"), 
+]
 
-var score = 0
+var starting_corner: Vector2 = Vector2(48,150)
+
 var q_blocks
 var q_balls 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
+	$Background.texture = backgroundArray[0]
 	setup_blocks()
 	
 func _process(delta):
@@ -37,24 +41,19 @@ func _process(delta):
 			lose_message.visible = true
 	
 func setup_blocks():
-	var rows = 4
-	var cols = 17
-	var block_size = Vector2(70, 45)  # Adjust based on your block's size
-	var colors = [
-		Color(1, 0, 0),  # Red
-		Color(0, 1, 0),  # Green
-		Color(0, 0, 1),  # Blue
-		Color(1, 1, 0),  # Yellow
-		Color(1, 0, 1),   # Magenta
-		Color(0.5, 0.5, 0.3) 
-	]
+	$Background.texture = backgroundArray[Global.current_level]
+	var rows = Global.level_data.num_rows
+	var cols = 18
+	var block_size = Vector2(70, 60)  # Adjust based on your block's size
+	
+	if(Global.score > 0):
+		update_score()
 
 	for row in range(rows):
 		for col in range(cols):
 			var block = block_scene.instantiate() as StaticBody2D
 			block.connect("dead_block", Callable(self, "_on_dead_block"))
-			block.position = starting_corner + Vector2((col * block_size.x) /2.2, (row * block_size.y) /3)
-			block.color = colors[row % colors.size()]  # Assign a color based on the row
+			block.position = starting_corner + Vector2((col * block_size.x) /2.3, (row * block_size.y) / 4)
 			add_child(block)
 
 func winning_condition():
@@ -73,13 +72,20 @@ func _on_area_2d_body_entered(body):
 		body.queue_free()
 
 func _on_try_again_pressed():
+	Global.score = 0
+	update_score()
 	Engine.time_scale = 1
 	get_tree().reload_current_scene()
 
 func _on_next_level_pressed():
+	win_message.visible = false
 	Engine.time_scale = 1
-	get_tree().change_scene_to_file(MAIN_LEVEL)
+	Global.next_level()
+	get_tree().reload_current_scene()
 
 func _on_dead_block():
-	score += 10
-	$Score.text = "Score: %s" % score
+	Global.add_score()
+	update_score()
+
+func update_score():
+	$Score.text = "Score: %s" % Global.score

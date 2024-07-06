@@ -7,20 +7,21 @@ signal launch_ball
 @export var laser_particle_scene: PackedScene
 
 var initial_speed: int = 400
-var speed:int  = 400
+var speed: int  = 400
 var game_started = false
 var speed_powerup_on = false
 var laser_shooting = false
 var iName = 'Player'
 
 ## Debugger
-@export var debugger_scene: PackedScene
-var debugger_instance: CanvasLayer
+#@export var debugger_scene: PackedScene
+#var debugger_instance: CanvasLayer
 
 func _ready():
 	##Debugger
-	debugger_instance = debugger_scene.instantiate()
-	add_child(debugger_instance)
+#	debugger_instance = debugger_scene.instantiate()
+#	add_child(debugger_instance)
+
 	# Hide lasers initially
 	$LaserLeft.hide()
 	$LaserRight.hide()
@@ -30,7 +31,6 @@ func _process(delta):
 		_on_launch_ball()
 
 func _physics_process(delta):
-	print(speed)
 	var move_left = Input.is_action_pressed("move_left")
 	var move_right = Input.is_action_pressed("move_right")
 	 # Calculate the movement based on input
@@ -45,8 +45,8 @@ func _physics_process(delta):
 	position.y = 750
 	
 		# Update the variables to watch
-	debugger_instance.set_variable("speed tiper", speed_timer.time_left)
-	debugger_instance.set_variable("laser timer", laser_timer.time_left)
+	# debugger_instance.set_variable("speed tiper", speed_timer.time_left)
+	# debugger_instance.set_variable("laser timer", laser_timer.time_left)
 	
 	# Shoot lasers if active
 	if laser_shooting and Time.get_ticks_msec() % 500 < 16:  # Adjust firing rate as needed
@@ -59,7 +59,9 @@ func _on_launch_ball():
 
 func speed_powerup_go(value):
 	if speed_powerup_on:
-		speed_timer.time_left += 5
+		speed_timer.stop()
+		speed_timer.wait_time += speed_timer.time_left + 10
+		speed_timer.start()
 		return
 	
 	speed_powerup_on = true

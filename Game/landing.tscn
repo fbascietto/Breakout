@@ -1,12 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://qx6edrsfgnj7"]
+[gd_scene load_steps=5 format=3 uid="uid://qx6edrsfgnj7"]
 
 [ext_resource type="Script" path="res://Game/landing.gd" id="1_7qpux"]
 [ext_resource type="Texture2D" uid="uid://b2ytlhrdwcftu" path="res://Art/arkanoid.png" id="1_aoep7"]
+[ext_resource type="Texture2D" uid="uid://dfxkyw2q0e6ap" path="res://Art/Gray.png" id="2_hwckr"]
+[ext_resource type="AudioStream" uid="uid://1ftw3ecjmnjw" path="res://Sounds/game-music-loop-1-143979.mp3" id="4_21v6d"]
 
 [node name="Landing" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_7qpux")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -131.0
+offset_top = -48.0
+offset_right = 761.0
+offset_bottom = 844.0
+texture = ExtResource("2_hwckr")
+stretch_mode = 1
 
 [node name="Arkanoid" type="Sprite2D" parent="."]
 position = Vector2(301, 208)
@@ -20,6 +31,9 @@ offset_top = 57.0
 offset_right = 419.0
 offset_bottom = 120.0
 size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 45
 text = "CUADRAZO"
 
@@ -31,5 +45,9 @@ offset_right = 350.0
 offset_bottom = 574.0
 size_flags_horizontal = 4
 text = "Start"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_21v6d")
+autoplay = true
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

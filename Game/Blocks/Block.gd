@@ -1,6 +1,5 @@
 extends StaticBody2D
 
-
 signal dead_block
 
 enum PowerUpType {
@@ -11,14 +10,28 @@ enum PowerUpType {
 
 # Property to define the block's health
 @export var health = 1
-@export var color : Color = Color(1, 1, 1)  # Default white color
 @export var power_up_scene: PackedScene
 @export var power_up_drop_chance: float = 0.2  # 20% chance
 var iName = 'block'
 
+# Load your textures into an array
+var textures = [
+	preload("res://Art/br1.png"),
+	preload("res://Art/br2.png"),
+	preload("res://Art/br3.png"),
+	preload("res://Art/br4.png"),
+	preload("res://Art/br6.png"),
+	preload("res://Art/br7.png"),
+	preload("res://Art/br9.png"),
+	preload("res://Art/br8.png"),
+]
+
 func _ready():
 	# Set the color of the sprite
-	$Sprite2D.modulate = color  # Assuming you have a Sprite2D node
+	# Randomly select a texture and assign it to the block
+	var random_texture = textures[randi() % textures.size()]
+	var sprite = self.get_node("Sprite2D") # adjust if the node name is different
+	sprite.texture = random_texture
 	 # Connect the body_entered signal to handle collisions
 	$CollisionShape2D.connect("body_entered", Callable(self, "_on_body_entered"))
 
