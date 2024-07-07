@@ -26,7 +26,7 @@ func _ready():
 	$LaserLeft.hide()
 	$LaserRight.hide()
 	
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_pressed("start") and !game_started:
 		_on_launch_ball()
 
@@ -94,7 +94,7 @@ func shoot_lasers():
 	var laser_left = laser_particle_scene.instantiate()
 	laser_left.position = $LaserLeft.global_position
 	get_parent().add_child(laser_left)
-
+	AudioManager.play_sound(AudioManager.LASER)
 	var laser_right = laser_particle_scene.instantiate()
 	laser_right.position = $LaserRight.global_position
 	get_parent().add_child(laser_right)

@@ -23,12 +23,12 @@ texture = ExtResource("3_8elx3")
 position = Vector2(-0.5, 1)
 shape = SubResource("RectangleShape2D_hueke")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Block" type="Area2D" parent="."]
 visible = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Block"]
 visible = false
 position = Vector2(-0.5, 1)
 shape = SubResource("RectangleShape2D_x8pcm")
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]
+[connection signal="body_entered" from="Block" to="." method="_on_body_entered"]

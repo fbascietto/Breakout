@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://cuh0412b8g6v7"]
+[gd_scene load_steps=8 format=3 uid="uid://cuh0412b8g6v7"]
 
 [ext_resource type="Script" path="res://Game/Levels/Level_Placeholder.gd" id="1_1k2qk"]
 [ext_resource type="PackedScene" uid="uid://duvttb1y5lqq0" path="res://Game/Blocks/block.tscn" id="2_rsdxe"]
 [ext_resource type="PackedScene" uid="uid://sw53c6ll5q3r" path="res://Game/Player/Player.tscn" id="3_fe0ug"]
 [ext_resource type="PackedScene" uid="uid://bdnt2bmbmqr7b" path="res://Game/Walls/wall.tscn" id="4_j310y"]
 [ext_resource type="PackedScene" uid="uid://b17fnhu5jw0yv" path="res://Game/Ball/ball.tscn" id="5_1r4ri"]
+[ext_resource type="AudioStream" uid="uid://dyljbjasio8dh" path="res://Sounds/level_music.mp3" id="6_fk0fa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s4h1v"]
 size = Vector2(680, 33.5)
@@ -160,6 +161,10 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "Try again
 "
+
+[node name="LevelMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_fk0fa")
+volume_db = -17.515
 
 [connection signal="life_lost" from="." to="Player" method="_on_level_1_life_lost"]
 [connection signal="body_entered" from="BallChecker" to="." method="_on_area_2d_body_entered"]

@@ -8,3 +8,9 @@ size = Vector2(1138, 20)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(240, 0)
 shape = SubResource("RectangleShape2D_yk8df")
+
+[node name="Wall" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
+position = Vector2(480, 0)
+shape = SubResource("RectangleShape2D_yk8df")

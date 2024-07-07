@@ -32,8 +32,6 @@ func _ready():
 	var random_texture = textures[randi() % textures.size()]
 	var sprite = self.get_node("Sprite2D") # adjust if the node name is different
 	sprite.texture = random_texture
-	 # Connect the body_entered signal to handle collisions
-	$CollisionShape2D.connect("body_entered", Callable(self, "_on_body_entered"))
 
 func _on_body_entered(body):
 	var chance = randf()

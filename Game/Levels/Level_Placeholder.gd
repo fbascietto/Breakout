@@ -7,6 +7,7 @@ signal life_lost
 
 @onready var lose_message : Control = $LosingLayout
 @onready var win_message : Control = $WinningLayout
+@onready var music_player = $LevelMusic
 
 var backgroundArray = [ 
 	preload("res://Art/Green.png"),
@@ -22,9 +23,11 @@ var q_balls
 
 func _ready():
 	$Background.texture = backgroundArray[0]
+	music_player.stream.set_loop(true)
+	music_player.play()
 	setup_blocks()
 	
-func _process(delta):
+func _process(_delta):
 	q_blocks = get_children().filter(func(child): return child is StaticBody2D).size()
 	q_balls = get_children().filter(func(child): return child is Ball).size()
 
@@ -37,6 +40,8 @@ func _process(delta):
 			$Lives.text = "Lives: %s" % lives
 			life_lost.emit()
 		else:
+			music_player.stop()
+			AudioManager.play_sound(AudioManager.LOSE)
 			Engine.time_scale = 0
 			lose_message.visible = true
 	
@@ -63,6 +68,8 @@ func losing_condition():
 	return q_balls == 0
 	
 func show_next_level_prompt():
+	music_player.stop()
+	AudioManager.play_sound(AudioManager.WIN)
 	# Freeze the game
 	Engine.time_scale = 0
 	win_message.visible = true

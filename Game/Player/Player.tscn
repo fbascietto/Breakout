@@ -24,6 +24,12 @@ texture = ExtResource("4_x5138")
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_4wpwp")
 
+[node name="Player" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_4wpwp")
+
 [node name="LaserLeft" type="Sprite2D" parent="."]
 position = Vector2(-36, -2)
 scale = Vector2(0.132883, 0.132883)
